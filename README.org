@@ -3,4 +3,5 @@ SimpleEventStreamPlayer class in SuperCollider. A subset of the library in sc-ha
 
 See also: 
 
-- 
+- https://github.com/iani/sc-hacks=redux
+- https://github.com/iani/sc-hacks

@@ -8,6 +8,6 @@ See also:
 
 * Usage
 
-1. Copy (or symlink) the folder =Classes= into your =Platform.userExtensionDir=.
+1. Copy (or symlink) the folder =Classes= (or the whole =aliran= folder) into your =Platform.userExtensionDir=.
 2. Recompile SCClass Library (Control-Shift-L).
 3. See examples in folder =Examples=.

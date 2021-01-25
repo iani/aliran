@@ -33,7 +33,7 @@ SimpleEventStreamPlayer {
 
 	play {
 		if (this.isRunning) { ^"Stream already playing".postln; };
-		getter.reset;
+		getter.resetIfNotInterrupted;
 		routine = {
 			while {
 				(currentEvent = getter.next.play).notNil;
@@ -74,5 +74,6 @@ SimpleEventStreamPlayer {
 	// All of the below are delegated to EventGetter (q.v.).
 	set { | inEvent | getter.set(inEvent); }
 	add { | inEvent | getter.add(inEvent); }
+	removeKey { | key | getter.removeKey(key); }
 	addToParent { | key, value | getter.addToParent(key, value); }
 }

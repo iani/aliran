@@ -22,15 +22,19 @@ EventGetter {
 		^this.newCopyArgs(stream,
 			proto.copy,
 			parent.asParent
-		);
+		).reset;
 	}
 
-	reset {
-		if (wasInterrupted) { // do not reset if resuming from user stop
-		}{
-			sourceEvent = proto.makeStream(parent);
-		};
+	reset { sourceEvent = proto.makeStream(parent) }
+
+	resetIfNotInterrupted { // do not reset if resuming from user stop
+		if (wasInterrupted) {}{ this.reset };
 		wasInterrupted = false; // !!!
+	}
+
+	clear { 
+		proto = ().parent = parent.asParent;
+		this.reset;
 	}
 
 	next {
@@ -76,8 +80,7 @@ EventGetter {
 	set { | argEvent |
 		// set proto to argEvent and update sourceEvent
 		proto = argEvent.copy.parent = parent;
-		// TODO: selectively replace sourceEvent's keys
-		this argEventStreams: proto;
+		this.reset;
 	}
 
 	addEventStreams { | argEvent |
@@ -88,10 +91,13 @@ EventGetter {
 		// add all keys-values of argEvent to proto.
 		// set proto to argEvent and update sourceEvent
 		proto = argEvent.copy.parent = parent;
-		// TODO: selectively replace sourceEvent's keys
-		this argEventStreams: proto;
+		this addEventStreams: proto;
 	}
 
+	removeKey { | key |
+		proto.put(key, nil);
+		sourceEvent.put(key, nil);
+	}
 	// ================
 	// 2: Modify parent.
 	// Events having this parent automatically inherit new contents.

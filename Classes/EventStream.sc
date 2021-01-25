@@ -45,8 +45,9 @@ EventStream /* : Stream */ { // TODO: review subclassing from Stream.
 	// Modify prototype event and its stream at any point (also while playing).
 	// All of the below are delegated to EventGetter (q.v.).
 	set { | inEvent | streamPlayer.set(inEvent); }
+	put { | key, value | this add: ().put(key, value); }
 	add { | inEvent | streamPlayer.add(inEvent); }
+	removeKey { | key | streamPlayer.removeKey(key); }
 	addToParent { | argEvent | streamPlayer addToParent: argEvent; }
 	setParentKey { | key, value | streamPlayer.setParentKey(key, value); }
-
 }

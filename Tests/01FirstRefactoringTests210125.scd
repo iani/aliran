@@ -10,11 +10,6 @@ a;
 //:Event:play plays just one event
 ().play; // plays just one event
 //:================================================================
-//:debug Event:makeStream
-().makeStream;
-(dur: Pseries(1, 1, 3)).makeStream;
-
-//:
 //:Event:splay plays the event as stream
 (amp: 1).splay;
 //:Start and stop an EventStream;
@@ -28,8 +23,13 @@ a;
 		stream.play;
 	};
 }.fork;
-//:Modifying an EventStream 
-{
-	
-	
-}.fork;
+//:Modifying an EventStream while playing
+~stream = (dur: 0.1).splay;
+~stream add: (degree: Pwhite(-10, 0));
+~stream add: (degree: Pbrown(0, 10, 2));
+~stream.put(\amp, Pbrown(0, 0.1, 0.01));
+~stream.put(\dur, Pbrown(0.01, 0.1, 0.01));
+~stream.stop;
+~stream.start;
+~stream set: (dur: Prand([0.5, 0.05], inf));
+//:

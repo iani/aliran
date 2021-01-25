@@ -1,7 +1,13 @@
-* aliran
+
 SimpleEventStreamPlayer class in SuperCollider. A subset of the library in sc-hacks-redux repository.
 
 See also: 
 
 - https://github.com/iani/sc-hacks=redux
 - https://github.com/iani/sc-hacks
+
+* Usage
+
+1. Copy (or symlink) the folder =Classes= into your =Platform.userExtensionDir=.
+2. Recompile SCClass Library (Control-Shift-L).
+3. See examples in folder =Examples=.

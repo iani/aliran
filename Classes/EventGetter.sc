@@ -66,4 +66,39 @@ EventGetter {
 	}
 
 	atEnd { ^currentEvent.isNil; }
+
+	// ================================================================
+	// modifying contents while running
+
+	// ================
+	// 1: Modify prototype. Also add the streams of all new keys sourceEvent
+	// modified keys 
+	set { | argEvent |
+		// set proto to argEvent and update sourceEvent
+		proto = argEvent.copy.parent = parent;
+		// TODO: selectively replace sourceEvent's keys
+		this argEventStreams: proto;
+	}
+
+	addEventStreams { | argEvent |
+		sourceEvent !? { sourceEvent.addStreams(argEvent) };
+	}
+	
+	add { | argEvent |
+		// add all keys-values of argEvent to proto.
+		// set proto to argEvent and update sourceEvent
+		proto = argEvent.copy.parent = parent;
+		// TODO: selectively replace sourceEvent's keys
+		this argEventStreams: proto;
+	}
+
+	// ================
+	// 2: Modify parent.
+	// Events having this parent automatically inherit new contents.
+
+	addToParent { | argEvent | // add all keys-values of argEvent to parent.
+		parent addEvent: argEvent;
+	}
+
+	setParentKey { | key, value | parent[key] = value; }
 }

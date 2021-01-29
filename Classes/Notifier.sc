@@ -39,4 +39,12 @@ Notifier {
 			this.removeNotifier(notifier, message);
 		})
 	}
+
+	removeMessage { | message |
+		// remove all listeners listening to me at this message
+		
+	}
+
+	removeListeners { // remove all listeners
+	}
 }

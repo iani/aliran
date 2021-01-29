@@ -11,13 +11,13 @@ Extra features for EventStream
 		this.addNotifier(trig, \trig, { | n ... args |
 			this.next.play(n, *args); 
 		});
-		trig.addTriggered(this);
+		// trig.addTriggered(this);
 	}
 
 	removeTrig { | id |
 		var trig;
 		(trig = OSCTrig.access(id)) !? {
-			trig.removeTriggered(this);
+			// trig.removeTriggered(this);
 			this.removeNotifier(trig, \trig);
 		}
 	}

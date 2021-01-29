@@ -36,11 +36,6 @@ EventStream /* : Stream */ { // TODO: review subclassing from Stream.
 
 	start { this.play }
 	play { streamPlayer.play; }
-	// play using a tr synth for timing (instead of own dur stream).
-	addTrig { 
-		
-		
-	}
 	stop { streamPlayer.stop }
 
 	// access

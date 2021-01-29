@@ -18,8 +18,8 @@ Notifier {
 		Library.put(notifier, message, listener, nil);
 	}
 
-	// respond to changed messages
-	update { | sender, message ... args | action.(sender, this, *args); }	
+	// respond to changed messages. Note: 'this' contains notifier and listener
+	update { | sender, message ... args | action.(this, *args); }	
 }
 
 + Object {
@@ -34,8 +34,8 @@ Notifier {
 	}
 
 	addNotifierOneShot { | notifier, message, action |
-		this.addNotifier(notifier, message, { | notifier, listener ... args |
-			action.(notifier, listener, *args);
+		this.addNotifier(notifier, message, { | notification ... args |
+			action.(notification, *args);
 			this.removeNotifier(notifier, message);
 		})
 	}

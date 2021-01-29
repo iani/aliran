@@ -3,17 +3,18 @@ Add state without adding variables.
 See discussion in https://github.com/iani/sc-hacks-redux/blob/master/README.org
 */
 
-+ Event {
-	asController {
-		var c;
-		c = Controller();
-		this keysValuesDo: { | key, value | c[key] = value };
-		^c;
-	}
-}
-
 + Class {
-	atLib { | key ... args |
-		^Library.clobal.at(this, key) ?? { this.new(*args) }
+	// if not present at key, then store new instance in key and return that
+	obtain { | key ... args |
+		var new;
+		new = this.access(key);
+		new ?? {
+			new = this.new(*args);
+			Libaru.global.put(this, key, new);
+		};
+		^new;
 	}
+
+	// return what is stored in library at [this, key]
+	access { | key | ^Library.global.at(this, key) }
 }
